@@ -12,6 +12,7 @@ using BerylCalendar.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BerylCalendar
 {
@@ -27,9 +28,14 @@ namespace BerylCalendar
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //services.AddDbContext<ApplicationDbContext>(options =>
+                //options.UseSqlServer(
+                    //Configuration.GetConnectionString("BerylConnection")));
+            //services.AddDatabaseDeveloperPageExceptionFilter();
+
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
-                    Configuration.GetConnectionString("BerylConnection")));
+                    Configuration.GetConnectionString("BerylCalendarAzureString")));
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
